@@ -7,7 +7,7 @@
 #include <math.h>
 
 #define ll long long
-#define FOR(_i,_n) for(int _i; _i < _n; i++)
+#define FOR(_i,_n) for(int _i = 0; _i < _n; i++)
 
 /* Debuggers */
 #define showstrvec(svec)		for(string s:svec){cout << s << endl;}
