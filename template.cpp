@@ -10,9 +10,8 @@
 #define FOR(_i,_n) for(int _i = 0; _i < _n; _i++)
 
 /* Debuggers */
-#define showvec(vec)			for(auto v:vec){cout << v << " ";} cout << endl;
-#define showvecline(vec)		for(auto v:vec){cout << v << endl;} cout << endl;
-
+#define showstrvec(svec)		for(string s:svec){cout << s << endl;}
+#define showvec(vec)			for(auto v:vec){cout << v << endl;}
 
 using namespace std;
 
