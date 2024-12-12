@@ -13,7 +13,7 @@
 #define LOG(_x) cout << _x << endl
 
 /* Debuggers */
-#define showvecline(svec)		for(auto s:svec){cout << s << " ";} cout << endl;
+#define showvecline(svec)		{for(auto s:svec){cout << s << " ";} cout << endl;}
 #define showvec(vec)			for(auto v:vec){cout << v << endl;}
 
 using namespace std;
