@@ -18,10 +18,11 @@
 
 using namespace std;
 
-#define MAP_SIZE 10
+#define MAP_SIZE 140
 
 string s[MAP_SIZE];
 set <pair <int, int>> mmap;
+ll adj = 0;
 
 void showgarden()
 {
@@ -43,6 +44,7 @@ void dfs(int y, int x, int depth) {
 		if (s[y-1][x] == s[y][x]) {
 			// cout << y << " " << x << endl;
 			// cout << "up " << s[y+1][x] << endl;
+			adj++;
 			depth++;
 			dfs(y-1, x, depth);
 		}
@@ -52,6 +54,7 @@ void dfs(int y, int x, int depth) {
 		if (s[y][x+1] == s[y][x]) {
 			// cout << y << " " << x << endl;
 			// cout << "right " << s[y][x+1] << endl;
+			adj++;
 			depth++;
 			dfs(y, x+1, depth);
 		}
@@ -61,6 +64,7 @@ void dfs(int y, int x, int depth) {
 		if (s[y+1][x] == s[y][x]) {
 			// cout << y << " " << x << endl;
 			// cout << "down " << s[y+1][x] << endl;
+			adj++;
 			depth++;
 			dfs(y+1, x, depth);
 		}
@@ -68,6 +72,7 @@ void dfs(int y, int x, int depth) {
 
 	if(x-1 >= 0) {
 		if (s[y][x-1] == s[y][x]) {
+			adj++;
 			depth++;
 			dfs(y, x-1, depth);
 		}
@@ -78,16 +83,7 @@ void dfs(int y, int x, int depth) {
 
 ll get_fence_cost()
 {
-	ll lmax = 0, lmin = MAP_SIZE - 1;
-	ll wmax = 0, wmin = MAP_SIZE - 1;
-	for(auto p:mmap) {
-		wmax = (p.second > wmax) ? p.second : wmax;
-		wmin = (p.second < wmin) ? p.second : wmin;
-		lmax = (p.first > lmax) ? p.first : lmax;
-		lmin = (p.first < lmin) ? p.first : lmin;
-	}
-
-	return 2*((wmax - wmin + 1) + (lmax - lmin + 1)) * mmap.size();
+	return mmap.size()*(mmap.size()*4 - adj);
 }
 
 int main(void)
@@ -100,18 +96,16 @@ int main(void)
 	FOR(y, MAP_SIZE) {
 		FOR(x, MAP_SIZE) {
 			if (s[y][x] != '-') {
-				cout << s[y][x] << endl;
 				dfs(y, x, 0);
 
 				for(auto p:mmap) {
 					s[p.first][p.second] = '-';
 				}
-
-				cout << get_fence_cost() << endl;
 				ans += get_fence_cost();
 				mmap.clear();
+				adj = 0;
 
-				showgarden();
+				// showgarden();
 			}
 		}
 	}
